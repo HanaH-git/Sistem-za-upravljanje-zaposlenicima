@@ -1,0 +1,29 @@
+﻿@model List<Aplikacija.Models.Odjel>
+
+<h2>Odjeli</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Naziv odjela</th>
+            <th>Lokacija</th>
+            <th>Broj zaposlenika</th>
+            <th>Prosječna plata</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var o in Model)
+        {
+            <tr>
+                <td>@o.Naziv</td>
+                <td>@o.Lokacija</td>
+                <td>@o.Zaposlenici.Count()</td>
+                <td>
+                    @(o.Zaposlenici.Any()
+                                    ? o.Zaposlenici.Average(z => z.PlataMonthly).ToString("0.00")
+                                    : "0.00")
+            </td>
+        </tr>
+                }
+    </tbody>
+</table>

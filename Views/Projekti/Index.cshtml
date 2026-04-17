@@ -1,0 +1,29 @@
+﻿@model List<Aplikacija.Models.Projekat>
+
+<h2>Projekti</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Budžet (USD)</th>
+            <th>Broj angažovanih zaposlenika</th>
+            <th>Ukupni sati sedmično</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Naziv</td>
+                <td>@p.BudzetUSD</td>
+                <td>@p.ZaposlenikProjekti.Count()</td>
+                <td>@p.ZaposlenikProjekti.Sum(zp => zp.SatiNaTjednu)</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@p.ProjekatId" class="btn btn-primary m-1">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

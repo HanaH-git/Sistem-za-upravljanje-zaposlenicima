@@ -1,0 +1,52 @@
+﻿@model List<Aplikacija.Models.Zaposlenik>
+
+<h2>Zaposlenici</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Dodaj zaposlenika</a>
+</p>
+
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <select name="odjelId" class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Odjeli, "OdjelId", "Naziv", ViewBag.OdabraniOdjel))">
+                <option value="">-- Svi odjeli --</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <a asp-action="Index" class="btn btn-secondary">Reset</a>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Email</th>
+            <th>Odjel</th>
+            <th>Plata</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var z in Model)
+        {
+            <tr>
+                <td>@z.Ime</td>
+                <td>@z.Prezime</td>
+                <td>@z.Email</td>
+                <td>@z.Odjel?.Naziv</td>
+                <td>@z.PlataMonthly</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@z.ZaposlenikId" class="btn btn-primary btn-sm m-1">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@z.ZaposlenikId" class="btn btn-primary btn-sm m-1">Delete</a>
+                    <a asp-action="Details" asp-route-id="@z.ZaposlenikId" class="btn btn-primary btn-sm m-1">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

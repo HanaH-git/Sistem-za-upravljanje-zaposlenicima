@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model Aplikacija.Models.Zaposlenik
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Uredi zaposlenika</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ZaposlenikId" />
+
+    <div class="mb-3">
+        <label asp-for="Ime" class="form-label"></label>
+        <input asp-for="Ime" class="form-control" />
+        <span asp-validation-for="Ime" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Prezime" class="form-label"></label>
+        <input asp-for="Prezime" class="form-control" />
+        <span asp-validation-for="Prezime" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PlataMonthly" class="form-label"></label>
+        <input asp-for="PlataMonthly" class="form-control" />
+        <span asp-validation-for="PlataMonthly" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DatumZaposlenja" class="form-label"></label>
+        <input asp-for="DatumZaposlenja" type="date" class="form-control" />
+        <span asp-validation-for="DatumZaposlenja" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="OdjelId" class="form-label"></label>
+        <select asp-for="OdjelId" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Odjeli, "OdjelId", "Naziv"))">
+            <option value="">-- Odaberi odjel --</option>
+        </select>
+        <span asp-validation-for="OdjelId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sačuvaj izmjene</button>
+    <a asp-action="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,45 @@
+﻿@model Aplikacija.Models.Projekat
+
+<h2>Detalji projekta</h2>
+
+<div class="mb-3">
+    <strong>Naziv:</strong> @Model.Naziv
+</div>
+
+<div class="mb-3">
+    <strong>Budžet (USD):</strong> @Model.BudzetUSD
+</div>
+
+<div class="mb-3">
+    <strong>Datum početka:</strong> @Model.DatumPocetak?.ToShortDateString()
+</div>
+
+<div class="mb-3">
+    <strong>Datum kraja:</strong> @Model.DatumKraj?.ToShortDateString()
+</div>
+
+<h4>Angažovani zaposlenici</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Uloga</th>
+            <th>Sati sedmično</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var zp in Model.ZaposlenikProjekti)
+        {
+            <tr>
+                <td>@zp.Zaposlenik?.Ime</td>
+                <td>@zp.Zaposlenik?.Prezime</td>
+                <td>@zp.Uloga</td>
+                <td>@zp.SatiNaTjednu</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Nazad</a>
